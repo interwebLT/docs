@@ -274,6 +274,20 @@
               </ul>
         </li>
         <li>
+          <a href="#product-groups" class="toc-h1 toc-link" data-title="Product Groups">Product Groups</a>
+              <ul class="toc-list-h2">
+                    <li>
+                      <a href="#product-group-object" class="toc-h2 toc-link" data-title="Product Groups">Product Group Object</a>
+                    </li>
+                    <li>
+                      <a href="#get-all-product-groups" class="toc-h2 toc-link" data-title="Product Groups">Get All Product Groups</a>
+                    </li>
+                    <li>
+                      <a href="#get-a-specific-product-group" class="toc-h2 toc-link" data-title="Product Groups">Get a Specific Product Group</a>
+                    </li>
+              </ul>
+        </li>
+        <li>
           <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
         </li>
         <li>
@@ -285,7 +299,7 @@
   <div class="dark-box"></div>
   <div class="content">
     <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Selly API. You can use our API to access Selly API endpoints to build your own systems on top of our platform..</p>
+<p>Welcome to the Selly API. You can use our API to access Selly API endpoints to build your own systems on top of our platform.</p>
 
 <p>We have official API wrappers in Shell, Ruby. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='authentication'>Authentication</h1>
@@ -306,7 +320,7 @@
 
 <p>Selly uses API keys via the <code>Authorization</code> header to allow access to the API. You can retrieve and receive a new Selly API key at your <a href="https://selly.gg/settings">settings page</a>.</p>
 
-<p>The <code>Authorization</code> header is made up of your account&#39;s <code>email</code> and <code>API key</code> in the format <code>email:api_key</code> and then encoded via base 64.</p>
+<p>The <code>Authorization</code> header is made up of your account&#39;s <code>email</code> and <code>API key</code> in the format <code>email:api_key</code> and then encoded via base64.</p>
 
 <p>Selly expects a valid Authorization header to be included in all requests and that it looks like the following:</p>
 
@@ -593,7 +607,7 @@
 <ul class="api-attributes">
     <li>
         <p class="api-attributes-label">id<span>string</span></p>
-        <p class="api-attributes-description">Unique identifier for the order</p>
+        <p class="api-attributes-description">Unique identifier for the product</p>
     </li>
     <li>
         <p class="api-attributes-label">title<span>string</span></p>
@@ -783,6 +797,107 @@
 <td>The ID of the product to retrieve</td>
 </tr>
 </tbody></table>
+<h1 id='product-groups'>Product Groups</h1><h2 id='product-group-object'>Product Group Object</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ba6a15"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesome Product Group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ac24a3"</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-15T14:02:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-12T23:37:13.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='attributes'>Attributes</h3>
+<ul class="api-attributes">
+    <li>
+        <p class="api-attributes-label">id<span>string</span></p>
+        <p class="api-attributes-description">Unique identifier for the product group</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">title<span>string</span></p>
+        <p class="api-attributes-description">The title of the product group</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">product_ids<span>array</span></p>
+        <p class="api-attributes-description">The product ids that this group is made up of</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">created_at<span>datetime</span></p>
+        <p class="api-attributes-description">The date and time that the resource was created</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">updated_at<span>datetime</span></p>
+        <p class="api-attributes-description">The date and time that the resource was last updated. If never updated, it will be equal to <code>created_at</code></p>
+    </li>
+</ul>
+<h2 id='get-all-product-groups'>Get All Product Groups</h2><pre class="highlight ruby tab-ruby"><code><span class="no">Selly</span><span class="o">::</span><span class="no">ProductGroups</span><span class="p">.</span><span class="nf">list</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://selly.gg/api/product_groups"</span>
+  -H <span class="s2">"Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ba6a15"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesome Product Group"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ac24a3"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-15T14:02:47.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-12T23:37:13.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12abc3e"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another Product Group"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"product_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ac24a3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"32156a"</span><span class="p">],</span><span class="w">
+       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-15T14:02:47.000Z"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-12T23:37:13.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all product groups.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://selly.gg/api/product_groups</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Used for pagination</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-product-group'>Get a Specific Product Group</h2><pre class="highlight ruby tab-ruby"><code><span class="no">Selly</span><span class="o">::</span><span class="no">ProductGroups</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'ba6a15'</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://selly.gg/api/product_groups/ba6a15"</span>
+  -H <span class="s2">"Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ba6a15"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesome Product Group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ac24a3"</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-15T14:02:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-12T23:37:13.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific product group.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://selly.gg/api/product_groups/<span class="url-paramater">:ID</span></code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the product group to retrieve</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <blockquote>
 <p>Errors are returned in a JSON structured like this:</p>
@@ -838,6 +953,67 @@
 </tr>
 </tbody></table>
 <h1 id='webhooks'>Webhooks</h1>
+<blockquote>
+<p>A example webhook notification on a paid order event</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fd87d909-fbfc-466c-964a-5478d5bc066a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upgrade"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alishia@yahoo.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88.96.129.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gateway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"risk_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivered"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SERIAL-12345-12345"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crypto_value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crypto_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"referral"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"usd_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"exchange_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"webhook_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-27T14:20:34.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T21:31:15.000Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Webhooks are a HTTP callback event that is sent to the Webhook URL specified for the affected order. All webhook requests are sent as a <code>POST</code> request and are handled independently from the event, asynchronously.</p>
+
+<p>The content sent in the webhook is a JSON object of the resource that the webhook is related to. If it was a order webhook, a <a href="#order-object">order object</a> will be sent.</p>
+
+<p>Each webhook request contains a <code>webhook_type</code> parameter</p>
+
+<table><thead>
+<tr>
+<th>Webhook Type</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Order paid</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Order chargeback/reversal</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Dynamic product</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Product out of stock</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Product reached stock warning level</td>
+</tr>
+</tbody></table>
+
   </div>
   <div class="dark-box">
         <div class="lang-selector">
