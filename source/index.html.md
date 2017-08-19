@@ -11,6 +11,7 @@ includes:
   - pagination
   - orders
   - products
+  - product_groups
   - errors
   - webhooks
 

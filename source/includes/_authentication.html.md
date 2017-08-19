@@ -19,7 +19,7 @@ Selly.api_email = 'your account email'
 
 Selly uses API keys via the `Authorization` header to allow access to the API. You can retrieve and receive a new Selly API key at your [settings page](https://selly.gg/settings).
 
-The `Authorization` header is made up of your account's `email` and `API key` in the format `email:api_key` and then encoded via base 64.
+The `Authorization` header is made up of your account's `email` and `API key` in the format `email:api_key` and then encoded via base64.
 
 Selly expects a valid Authorization header to be included in all requests and that it looks like the following:
 

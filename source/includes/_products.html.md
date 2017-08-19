@@ -35,7 +35,7 @@
 <ul class="api-attributes">
     <li>
         <p class="api-attributes-label">id<span>string</span></p>
-        <p class="api-attributes-description">Unique identifier for the order</p>
+        <p class="api-attributes-description">Unique identifier for the product</p>
     </li>
     <li>
         <p class="api-attributes-label">title<span>string</span></p>
