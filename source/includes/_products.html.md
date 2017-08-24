@@ -234,3 +234,12 @@ This endpoint retrieves a specific product.
 Parameter | Description
 --------- | -----------
 ID | The ID of the product to retrieve
+
+
+## Dynamic Products
+
+The <code>Dynamic</code> product type is a product type that is fetched externally. Selly will send a [Webhook](#webhook) to the <code>dynamic_url</code> and will set the <code>delivered_info</code> of the <code>Order</code> to be the <b>plain text</b> response truncated to 500 characters.
+
+A common use case of a dynamic product would be license generation or any product that must be generated.
+
+<aside class="warning">The response of a dynamic product webhook cannot be a file, HTML, etc. It must be plain text.</aside>

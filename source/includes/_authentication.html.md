@@ -26,3 +26,5 @@ Selly expects a valid Authorization header to be included in all requests and th
 `Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk=`
 
 In this example, if we decode the string we'll receive `youremail:thisisyourAPIKey` which when split would mean that the email provided is `youremail` and the API key is `thisisyourAPIKey`.
+
+<aside class="alert">A useragent must be set. We recommend you set it to be something such as <code>Yourusername - website-using-api.com</code></aside>

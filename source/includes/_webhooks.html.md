@@ -34,6 +34,8 @@ The content sent in the webhook is a JSON object of the resource that the webhoo
 
 Each webhook request contains a `webhook_type` parameter
 
+Webhooks can be simulated via our [webhook simulator](https://selly.gg/webhooks/new).
+
 Webhook Type | Meaning
 ---------- | -------
 1 | Order paid

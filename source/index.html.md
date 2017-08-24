@@ -12,8 +12,9 @@ includes:
   - orders
   - products
   - product_groups
-  - errors
+  - pay
   - webhooks
+  - errors
 
 search: true
 ---
