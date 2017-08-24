@@ -206,13 +206,6 @@
   <nav class="heading-font flex horizontal items-center">
     <div class="branding"><a href="https://selly.gg" class="navbar-brand">
       <img class="logo-small" src="https://selly.gg/images/selly-logo.svg" alt="Selly logo"> </a></div>
-    <div class="navigation mla">
-      <ul class="nav mla">
-        <li><a><span>v2.0</span></a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Sign Up</a></li>
-      </ul>
-    </div>
   </nav>
 </header>
 <a href="#" id="nav-button">
@@ -271,6 +264,9 @@
                     <li>
                       <a href="#get-a-specific-product" class="toc-h2 toc-link" data-title="Products">Get a Specific Product</a>
                     </li>
+                    <li>
+                      <a href="#dynamic-products" class="toc-h2 toc-link" data-title="Products">Dynamic Products</a>
+                    </li>
               </ul>
         </li>
         <li>
@@ -288,10 +284,18 @@
               </ul>
         </li>
         <li>
-          <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          <a href="#selly-pay" class="toc-h1 toc-link" data-title="Selly Pay">Selly Pay</a>
+              <ul class="toc-list-h2">
+                    <li>
+                      <a href="#create-a-payment" class="toc-h2 toc-link" data-title="Selly Pay">Create a Payment</a>
+                    </li>
+              </ul>
         </li>
         <li>
           <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+        </li>
+        <li>
+          <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
         </li>
   </div>
 </div>
@@ -327,6 +331,8 @@
 <p><code>Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk=</code></p>
 
 <p>In this example, if we decode the string we&#39;ll receive <code>youremail:thisisyourAPIKey</code> which when split would mean that the email provided is <code>youremail</code> and the API key is <code>thisisyourAPIKey</code>.</p>
+
+<aside class="alert">A useragent must be set. We recommend you set it to be something such as <code>Yourusername - website-using-api.com</code></aside>
 <h1 id='pagination'>Pagination</h1>
 <blockquote>
 <p>An example of paginating orders:</p>
@@ -797,6 +803,12 @@
 <td>The ID of the product to retrieve</td>
 </tr>
 </tbody></table>
+<h2 id='dynamic-products'>Dynamic Products</h2>
+<p>The <code>Dynamic</code> product type is a product type that is fetched externally. Selly will send a <a href="#webhook">Webhook</a> to the <code>dynamic_url</code> and will set the <code>delivered_info</code> of the <code>Order</code> to be the <b>plain text</b> response truncated to 500 characters.</p>
+
+<p>A common use case of a dynamic product would be license generation or any product that must be generated.</p>
+
+<aside class="warning">The response of a dynamic product webhook cannot be a file, HTML, etc. It must be plain text.</aside>
 <h1 id='product-groups'>Product Groups</h1><h2 id='product-group-object'>Product Group Object</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ba6a15"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesome Product Group"</span><span class="p">,</span><span class="w">
@@ -898,6 +910,134 @@
 <td>The ID of the product group to retrieve</td>
 </tr>
 </tbody></table>
+<h1 id='selly-pay'>Selly Pay</h1>
+<p>Selly Pay provides a method of implementing a realtime checkout experience for any e-commerce platform and supporting a range of payment methods in one place.</p>
+
+<p>With Selly Pay there is no <code>Product</code> that the order bases some information off, which allows for complete access to our payment systems without having to create a unique <code>Product</code> for every alteration a <code>Payment</code> may have. This also means that Selly does not handle any delivery of the &quot;product&quot; purchased, we&#39;ll only send a <a href="#webhook">Webhook</a>.</p>
+
+<p>For the <code>gateway</code> chosen in the <code>Payment</code>, you must have the correct information (e.g your Bitcoin address if the <code>gateway</code> is Bitcoin) set in your <a href="https://selly.gg/settings">settings</a>.</p>
+
+<p>For each <code>Payment</code> a unique URL will be returned. The customer will have to be redirected to this URL in order to access the checkout page.</p>
+
+<aside class="alert">Selly Pay currently only supports crypto currencies out of the box, if you'd like to utilize gateways such as PayPal, please contact us.</aside>
+<h2 id='create-a-payment'>Create a Payment</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://selly.gg/api/pay"</span>
+  -H <span class="s2">"Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="</span>
+  -d <span class="s1">'{"title:"Selly Pay Example", "gateway":"Bitcoin", "email":"customer@email.com", "value":"10", "currency":"USD", "return_url":"https://website.com/return", "webhook_url":"https://website.com/webhook?secret=cEZMeEVlTz"}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="no">Selly</span><span class="o">::</span><span class="no">Pay</span><span class="o">::</span><span class="no">Create</span><span class="p">(</span>
+  <span class="ss">title: </span><span class="s1">'Selly Pay Example'</span><span class="p">,</span>
+  <span class="ss">gateway: </span><span class="s1">'Bitcoin'</span><span class="p">,</span>
+  <span class="ss">email: </span><span class="s1">'customer@email.com'</span><span class="p">,</span>
+  <span class="ss">value: </span><span class="mi">10</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span>
+  <span class="ss">currency: </span><span class="s1">'USD'</span><span class="p">,</span>
+  <span class="ss">return_url: </span><span class="s1">'https://website.com/return'</span><span class="p">,</span>
+  <span class="ss">webhook_url: </span><span class="s1">'https://website.com/webhook?secret=cEZMeEVlTz'</span>
+<span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selly.gg/payments/a78b04cf0272a193baca53416db510b84feae099/OTZ6di92LytKcnRmY0pmVTdEV0h3S3BUM1Fnb0ZURFp6cytOUEhWcEZMeEVlTzBjZHFzZFVlRGxabmZvWUtSR2kybHhyc0FHeHdUaHhwOWEzN3A1eFE9PS0tRXhHdk5SWU5TM2NWQWlhZzAwc3FqQT09--acf55a4be40ad6336f9ce7f9fbc063785851720e"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The customer should be redirected to this URL to activate the checkout experience</p>
+</blockquote>
+<h3 id='attributes'>Attributes</h3>
+<ul class="api-attributes">
+    <li>
+        <p class="api-attributes-label">title<span>string</span></p>
+        <p class="api-attributes-description">Title of the product shown on the checkout page</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">gateway<span>string</span></p>
+        <p class="api-attributes-description">The gateway used for this payment. <br>
+        Can be <code>Bitcoin</code>, <code>Ethereum</code>, <code>Litecoin</code>, <code>Dash</code> or <code>Bitcoin Cash</code></p>
+    </li>
+    <li>
+        <p class="api-attributes-label">email<span>string</span></p>
+        <p class="api-attributes-description">The email of the customer</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">value<span>decimal/float</span></p>
+        <p class="api-attributes-description">The fiat value/price of the order</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">currency<span>string</span></p>
+        <p class="api-attributes-description">The ISO 4217 currency code used for this payment</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">return_url<span>string</span></p>
+        <p class="api-attributes-description">URL displayed to the customer after the payment is completed</p>
+    </li>
+    <li>
+        <p class="api-attributes-label">webhook_url<span>string</span></p>
+        <p class="api-attributes-description">Webhook URL used on payment completion</p>
+    </li>
+</ul>
+<h1 id='webhooks'>Webhooks</h1>
+<blockquote>
+<p>A example webhook notification on a paid order event</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fd87d909-fbfc-466c-964a-5478d5bc066a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upgrade"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alishia@yahoo.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88.96.129.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gateway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"risk_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivered"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SERIAL-12345-12345"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crypto_value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crypto_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"referral"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"usd_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"exchange_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"webhook_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-27T14:20:34.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T21:31:15.000Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Webhooks are a HTTP callback event that is sent to the Webhook URL specified for the affected order. All webhook requests are sent as a <code>POST</code> request and are handled independently from the event, asynchronously.</p>
+
+<p>The content sent in the webhook is a JSON object of the resource that the webhook is related to. If it was a order webhook, a <a href="#order-object">order object</a> will be sent.</p>
+
+<p>Each webhook request contains a <code>webhook_type</code> parameter</p>
+
+<p>Webhooks can be simulated via our <a href="https://selly.gg/webhooks/new">webhook simulator</a>.</p>
+
+<table><thead>
+<tr>
+<th>Webhook Type</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Order paid</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Order chargeback/reversal</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Dynamic product</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Product out of stock</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Product reached stock warning level</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <blockquote>
 <p>Errors are returned in a JSON structured like this:</p>
@@ -950,67 +1090,6 @@
 <tr>
 <td>503</td>
 <td>Service Unavailable - We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
-<h1 id='webhooks'>Webhooks</h1>
-<blockquote>
-<p>A example webhook notification on a paid order event</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fd87d909-fbfc-466c-964a-5478d5bc066a"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upgrade"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alishia@yahoo.com"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88.96.129.5"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"gateway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"risk_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"delivered"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SERIAL-12345-12345"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crypto_value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crypto_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"referral"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"usd_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"exchange_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"webhook_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-27T14:20:34.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T21:31:15.000Z"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Webhooks are a HTTP callback event that is sent to the Webhook URL specified for the affected order. All webhook requests are sent as a <code>POST</code> request and are handled independently from the event, asynchronously.</p>
-
-<p>The content sent in the webhook is a JSON object of the resource that the webhook is related to. If it was a order webhook, a <a href="#order-object">order object</a> will be sent.</p>
-
-<p>Each webhook request contains a <code>webhook_type</code> parameter</p>
-
-<table><thead>
-<tr>
-<th>Webhook Type</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>1</td>
-<td>Order paid</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Order chargeback/reversal</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Dynamic product</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Product out of stock</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Product reached stock warning level</td>
 </tr>
 </tbody></table>
 
