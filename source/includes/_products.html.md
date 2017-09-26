@@ -68,7 +68,7 @@
     <li>
         <p class="api-attributes-label">paypal<span>boolean</span></p>
         <p class="api-attributes-description">Whether PayPal is accepted on this product</p>
-    </li> 
+    </li>
     <li>
         <p class="api-attributes-label">stripe<span>boolean</span></p>
         <p class="api-attributes-description">Whether Stripe is accepted on this product</p>
@@ -80,7 +80,7 @@
     <li>
         <p class="api-attributes-label">dash<span>boolean</span></p>
         <p class="api-attributes-description">Whether Dash is accepted on this product</p>
-    </li> 
+    </li>
     <li>
         <p class="api-attributes-label">ethereum<span>boolean</span></p>
         <p class="api-attributes-description">Whether Ethereum is accepted on this product</p>
@@ -89,6 +89,10 @@
         <p class="api-attributes-label">perfect_money<span>boolean</span></p>
         <p class="api-attributes-description">Whether Perfect Money is accepted on this product</p>
     </li>
+        <li>
+            <p class="api-attributes-label">bitcoin_cash<span>boolean</span></p>
+            <p class="api-attributes-description">Whether Bitcoin Cash is accepted on this product</p>
+        </li>
     <li>
         <p class="api-attributes-label">custom<span>object</span></p>
         <p class="api-attributes-description">The custom inputs that the customer can input. The keys represent the index.</p>
@@ -134,6 +138,7 @@ curl "https://selly.gg/api/products"
         "dash": true,
         "ethereum": true,
         "perfect_money": true,
+        "bitcoin_cash": true,
         "private": false,
         "unlisted": true,
         "seller_note": "Thanks for buying my product",
@@ -158,6 +163,7 @@ curl "https://selly.gg/api/products"
         "dash": false,
         "ethereum": false,
         "perfect_money": false,
+        "bitcoin_cash": false,
         "private": true,
         "unlisted": true,
         "seller_note": "",
@@ -167,7 +173,7 @@ curl "https://selly.gg/api/products"
         "created_at": "2017-03-25T20:12:20.000Z",
         "updated_at": "2017-03-25T20:14:14.000Z"
     }
-    
+
 ]
 ```
 
@@ -212,6 +218,7 @@ curl "https://selly.gg/api/products/ac24a3"
     "dash": true,
     "ethereum": true,
     "perfect_money": true,
+    "bitcoin_cash": true,
     "private": false,
     "unlisted": true,
     "seller_note": "Thanks for buying my product",

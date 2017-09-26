@@ -2,13 +2,13 @@
 
 Selly Pay provides a method of implementing a realtime checkout experience for any e-commerce platform and supporting a range of payment methods in one place.
 
-With Selly Pay there is no <code>Product</code> that the order bases some information off, which allows for complete access to our payment systems without having to create a unique <code>Product</code> for every alteration a <code>Payment</code> may have. This also means that Selly does not handle any delivery of the "product" purchased, we'll only send a [Webhook](#webhook).
+With Selly Pay there is no <code>Product</code> that the order bases some information off, which allows for complete access to our payment systems without having to create a unique <code>Product</code> for every alteration a <code>Payment</code> may have. This also means that Selly does not handle any delivery of the "product" purchased, we'll only send a [Webhook](#webhooks).
 
 For the <code>gateway</code> chosen in the <code>Payment</code>, you must have the correct information (e.g your Bitcoin address if the <code>gateway</code> is Bitcoin) set in your [settings](https://selly.gg/settings).
 
 For each <code>Payment</code> a unique URL will be returned. The customer will have to be redirected to this URL in order to access the checkout page.
 
-<aside class="alert">Selly Pay currently only supports crypto currencies out of the box, if you'd like to utilize gateways such as PayPal, please contact us.</aside>
+<aside class="alert">Selly Pay does not currently support Perfect Money and Stripe.</aside>
 
 ## Create a Payment
 
@@ -20,7 +20,7 @@ curl -X POST "https://selly.gg/api/pay"
 ```
 
 ```ruby
-Selly::Pay::Create(
+Selly::Pay.create(
   title: 'Selly Pay Example',
   gateway: 'Bitcoin',
   email: 'customer@email.com',
@@ -35,11 +35,11 @@ Selly::Pay::Create(
 
 ```json
 {
-    "url": "https://selly.gg/payments/a78b04cf0272a193baca53416db510b84feae099/OTZ6di92LytKcnRmY0pmVTdEV0h3S3BUM1Fnb0ZURFp6cytOUEhWcEZMeEVlTzBjZHFzZFVlRGxabmZvWUtSR2kybHhyc0FHeHdUaHhwOWEzN3A1eFE9PS0tRXhHdk5SWU5TM2NWQWlhZzAwc3FqQT09--acf55a4be40ad6336f9ce7f9fbc063785851720e"
+    "url": "https://selly.gg/pay/81971eae19ff0924026d7b2a7502b20372c15df5/bGU3Q09QSGtDNjR2cHJMYzhHdTd6Mm40bXpFNVdZOEtlaW9NckRySmxsVkZOSjhkb3N0SVM0cVF6UDJtU0NjejVrT0Q4ZFZKY1JVbi9ZTjJaSDhGRXc9PS0tdW5zUGptYjcrSGZSRjF5K0VmNUFNZz09--68ab83743fa057629b09bb9c7330841e54442784"
 }
 ```
 
-> The customer should be redirected to this URL to activate the checkout experience
+> The customer should be redirected to this URL to activate the checkout experience. Click [here for a preview](https://selly.gg/pay/81971eae19ff0924026d7b2a7502b20372c15df5/bGU3Q09QSGtDNjR2cHJMYzhHdTd6Mm40bXpFNVdZOEtlaW9NckRySmxsVkZOSjhkb3N0SVM0cVF6UDJtU0NjejVrT0Q4ZFZKY1JVbi9ZTjJaSDhGRXc9PS0tdW5zUGptYjcrSGZSRjF5K0VmNUFNZz09--68ab83743fa057629b09bb9c7330841e54442784)
 
 ### Attributes
 
@@ -51,7 +51,7 @@ Selly::Pay::Create(
     <li>
         <p class="api-attributes-label">gateway<span>string</span></p>
         <p class="api-attributes-description">The gateway used for this payment. <br>
-        Can be <code>Bitcoin</code>, <code>Ethereum</code>, <code>Litecoin</code>, <code>Dash</code> or <code>Bitcoin Cash</code></p>
+        Can be <code>Bitcoin</code>, <code>PayPal</code>, <code>Ethereum</code>, <code>Litecoin</code>, <code>Dash</code> or <code>Bitcoin Cash</code></p>
     </li>
     <li>
         <p class="api-attributes-label">email<span>string</span></p>
