@@ -653,7 +653,7 @@
     <li>
         <p class="api-attributes-label">paypal<span>boolean</span></p>
         <p class="api-attributes-description">Whether PayPal is accepted on this product</p>
-    </li> 
+    </li>
     <li>
         <p class="api-attributes-label">stripe<span>boolean</span></p>
         <p class="api-attributes-description">Whether Stripe is accepted on this product</p>
@@ -665,7 +665,7 @@
     <li>
         <p class="api-attributes-label">dash<span>boolean</span></p>
         <p class="api-attributes-description">Whether Dash is accepted on this product</p>
-    </li> 
+    </li>
     <li>
         <p class="api-attributes-label">ethereum<span>boolean</span></p>
         <p class="api-attributes-description">Whether Ethereum is accepted on this product</p>
@@ -674,6 +674,10 @@
         <p class="api-attributes-label">perfect_money<span>boolean</span></p>
         <p class="api-attributes-description">Whether Perfect Money is accepted on this product</p>
     </li>
+        <li>
+            <p class="api-attributes-label">bitcoin_cash<span>boolean</span></p>
+            <p class="api-attributes-description">Whether Bitcoin Cash is accepted on this product</p>
+        </li>
     <li>
         <p class="api-attributes-label">custom<span>object</span></p>
         <p class="api-attributes-description">The custom inputs that the customer can input. The keys represent the index.</p>
@@ -710,6 +714,7 @@
         </span><span class="s2">"dash"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ethereum"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"perfect_money"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"bitcoin_cash"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"unlisted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"seller_note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thanks for buying my product"</span><span class="p">,</span><span class="w">
@@ -734,6 +739,7 @@
         </span><span class="s2">"dash"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ethereum"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"perfect_money"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"bitcoin_cash"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"unlisted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"seller_note"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
@@ -785,6 +791,7 @@
     </span><span class="s2">"dash"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ethereum"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"perfect_money"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bitcoin_cash"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"unlisted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"seller_note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thanks for buying my product"</span><span class="p">,</span><span class="w">
@@ -920,17 +927,17 @@
 <h1 id='selly-pay'>Selly Pay</h1>
 <p>Selly Pay provides a method of implementing a realtime checkout experience for any e-commerce platform and supporting a range of payment methods in one place.</p>
 
-<p>With Selly Pay there is no <code>Product</code> that the order bases some information off, which allows for complete access to our payment systems without having to create a unique <code>Product</code> for every alteration a <code>Payment</code> may have. This also means that Selly does not handle any delivery of the &quot;product&quot; purchased, we&#39;ll only send a <a href="#webhook">Webhook</a>.</p>
+<p>With Selly Pay there is no <code>Product</code> that the order bases some information off, which allows for complete access to our payment systems without having to create a unique <code>Product</code> for every alteration a <code>Payment</code> may have. This also means that Selly does not handle any delivery of the &quot;product&quot; purchased, we&#39;ll only send a <a href="#webhooks">Webhook</a>.</p>
 
 <p>For the <code>gateway</code> chosen in the <code>Payment</code>, you must have the correct information (e.g your Bitcoin address if the <code>gateway</code> is Bitcoin) set in your <a href="https://selly.gg/settings">settings</a>.</p>
 
 <p>For each <code>Payment</code> a unique URL will be returned. The customer will have to be redirected to this URL in order to access the checkout page.</p>
 
-<aside class="alert">Selly Pay currently only supports crypto currencies out of the box, if you'd like to utilize gateways such as PayPal, please contact us.</aside>
+<aside class="alert">Selly Pay does not currently support Perfect Money and Stripe.</aside>
 <h2 id='create-a-payment'>Create a Payment</h2><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://selly.gg/api/pay"</span>
   -H <span class="s2">"Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="</span>
   -d <span class="s1">'{"title:"Selly Pay Example", "gateway":"Bitcoin", "email":"customer@email.com", "value":"10", "currency":"USD", "return_url":"https://website.com/return", "webhook_url":"https://website.com/webhook?secret=cEZMeEVlTz"}'</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code><span class="no">Selly</span><span class="o">::</span><span class="no">Pay</span><span class="o">::</span><span class="no">Create</span><span class="p">(</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="no">Selly</span><span class="o">::</span><span class="no">Pay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
   <span class="ss">title: </span><span class="s1">'Selly Pay Example'</span><span class="p">,</span>
   <span class="ss">gateway: </span><span class="s1">'Bitcoin'</span><span class="p">,</span>
   <span class="ss">email: </span><span class="s1">'customer@email.com'</span><span class="p">,</span>
@@ -944,11 +951,11 @@
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selly.gg/payments/a78b04cf0272a193baca53416db510b84feae099/OTZ6di92LytKcnRmY0pmVTdEV0h3S3BUM1Fnb0ZURFp6cytOUEhWcEZMeEVlTzBjZHFzZFVlRGxabmZvWUtSR2kybHhyc0FHeHdUaHhwOWEzN3A1eFE9PS0tRXhHdk5SWU5TM2NWQWlhZzAwc3FqQT09--acf55a4be40ad6336f9ce7f9fbc063785851720e"</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selly.gg/pay/81971eae19ff0924026d7b2a7502b20372c15df5/bGU3Q09QSGtDNjR2cHJMYzhHdTd6Mm40bXpFNVdZOEtlaW9NckRySmxsVkZOSjhkb3N0SVM0cVF6UDJtU0NjejVrT0Q4ZFZKY1JVbi9ZTjJaSDhGRXc9PS0tdW5zUGptYjcrSGZSRjF5K0VmNUFNZz09--68ab83743fa057629b09bb9c7330841e54442784"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>The customer should be redirected to this URL to activate the checkout experience</p>
+<p>The customer should be redirected to this URL to activate the checkout experience. Click <a href="https://selly.gg/pay/81971eae19ff0924026d7b2a7502b20372c15df5/bGU3Q09QSGtDNjR2cHJMYzhHdTd6Mm40bXpFNVdZOEtlaW9NckRySmxsVkZOSjhkb3N0SVM0cVF6UDJtU0NjejVrT0Q4ZFZKY1JVbi9ZTjJaSDhGRXc9PS0tdW5zUGptYjcrSGZSRjF5K0VmNUFNZz09--68ab83743fa057629b09bb9c7330841e54442784">here for a preview</a></p>
 </blockquote>
 <h3 id='attributes'>Attributes</h3>
 <ul class="api-attributes">
@@ -959,7 +966,7 @@
     <li>
         <p class="api-attributes-label">gateway<span>string</span></p>
         <p class="api-attributes-description">The gateway used for this payment. <br>
-        Can be <code>Bitcoin</code>, <code>Ethereum</code>, <code>Litecoin</code>, <code>Dash</code> or <code>Bitcoin Cash</code></p>
+        Can be <code>Bitcoin</code>, <code>PayPal</code>, <code>Ethereum</code>, <code>Litecoin</code>, <code>Dash</code> or <code>Bitcoin Cash</code></p>
     </li>
     <li>
         <p class="api-attributes-label">email<span>string</span></p>
