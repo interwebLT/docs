@@ -74,3 +74,30 @@ Selly::Pay.create(
         <p class="api-attributes-description">Webhook URL used on payment completion</p>
     </li>
 </ul>
+
+## Delete a Payment
+
+> The ID is the first path on the URL returned when creating a payment. The ID for the above example is as follows:
+
+```ruby
+Selly::Pay.destroy('81971eae19ff0924026d7b2a7502b20372c15df5')
+```
+
+```shell
+curl -X DELETE "https://selly.gg/api/pay/81971eae19ff0924026d7b2a7502b20372c15df5"
+  -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": true
+}
+```
+
+This endpoint deletes a Selly Pay payment
+
+### HTTP Request
+
+<code>DELETE https://selly.gg/api/pay/<span class="url-paramater">:ID</span></code>
