@@ -29,7 +29,7 @@
     </li>
     <li>
         <p class="api-attributes-label">discount<span>integer</span></p>
-        <p class="api-attributes-description">The discount in percent</p>
+        <p class="api-attributes-description">The discount as a percentage</p>
     </li>
     <li>
         <p class="api-attributes-label">max_uses<span>integer</span></p>

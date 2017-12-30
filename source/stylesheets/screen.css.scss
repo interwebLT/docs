@@ -1041,3 +1041,11 @@ header.fixed-sticky, header.open, header.sticky {
   padding-left: 20px;
   flex: 1;
 }
+
+.topic-header {
+  text-transform: uppercase;
+}
+
+.topic-header:not(:first-of-type) {
+  padding-top: 30px !important;
+}
