@@ -14,7 +14,7 @@ For each <code>Payment</code> a unique URL will be returned. The customer will h
 
 
 ```shell
-curl -X POST "https://selly.gg/api/pay"
+curl -X POST "https://selly.gg/api/v2/pay"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
   -d '{"title:"Selly Pay Example", "gateway":"Bitcoin", "email":"customer@email.com", "value":"10", "currency":"USD", "return_url":"https://website.com/return", "webhook_url":"https://website.com/webhook?secret=cEZMeEVlTz"}'
 ```
@@ -66,6 +66,10 @@ Selly::Pay.create(
         <p class="api-attributes-description">The ISO 4217 currency code used for this payment</p>
     </li>
     <li>
+        <p class="api-attributes-label">confirmations<span>integer</span></p>
+        <p class="api-attributes-description">The number of confirmations required for the crypto currency payment to be considered complete. Defaults to 1. Defaults to 6 for Ethereum and cannot be changed.</p>
+    </li>
+    <li>
         <p class="api-attributes-label">return_url<span>string</span></p>
         <p class="api-attributes-description">URL displayed to the customer after the payment is completed</p>
     </li>
@@ -84,7 +88,7 @@ Selly::Pay.destroy('81971eae19ff0924026d7b2a7502b20372c15df5')
 ```
 
 ```shell
-curl -X DELETE "https://selly.gg/api/pay/81971eae19ff0924026d7b2a7502b20372c15df5"
+curl -X DELETE "https://selly.gg/api/v2/pay/81971eae19ff0924026d7b2a7502b20372c15df5"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -100,4 +104,4 @@ This endpoint deletes a Selly Pay payment
 
 ### HTTP Request
 
-<code>DELETE https://selly.gg/api/pay/<span class="url-paramater">:ID</span></code>
+<code>DELETE https://selly.gg/api/v2/pay/<span class="url-paramater">:ID</span></code>

@@ -9,12 +9,13 @@ includes:
   - introduction
   - authentication
   - pagination
+  - errors
+  - coupons
   - orders
   - products
   - product_groups
   - pay
   - webhooks
-  - errors
 
 search: true
 ---

@@ -3,7 +3,7 @@
 > An example of paginating orders:
 
 ```shell
-curl "https://selly.gg/api/orders?page=10"
+curl "https://selly.gg/api/v2/orders?page=10"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -11,7 +11,7 @@ curl "https://selly.gg/api/orders?page=10"
 Selly::Orders::List(page: 10)
 ```
 
-Selly offers the ability to paginate any `list` or `index` resource. The `X-Total-Pages` header returns teh total number of pages for the resources at the specific endpoint you're using.
+Selly offers the ability to paginate any `list` or `index` resource. The `X-Total-Pages` header returns the total number of pages for the resources at the specific endpoint you're using.
 
 ### Query Parameters
 

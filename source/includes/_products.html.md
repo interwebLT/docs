@@ -19,6 +19,7 @@
     "dash": true,
     "ethereum": true,
     "perfect_money": true,
+    "bitcoin_cash": true,
     "private": false,
     "unlisted": true,
     "seller_note": "Thanks for buying my product",
@@ -115,7 +116,7 @@ Selly::Products.list
 ```
 
 ```shell
-curl "https://selly.gg/api/products"
+curl "https://selly.gg/api/v2/products"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -181,7 +182,7 @@ This endpoint retrieves all products.
 
 ### HTTP Request
 
-`GET https://selly.gg/api/products`
+`GET https://selly.gg/api/v2/products`
 
 ### Query Parameters
 
@@ -196,7 +197,7 @@ Selly::Products.get('ac24a3')
 ```
 
 ```shell
-curl "https://selly.gg/api/products/ac24a3"
+curl "https://selly.gg/api/v2/products/ac24a3"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -234,7 +235,7 @@ This endpoint retrieves a specific product.
 
 ### HTTP Request
 
-<code>GET https://selly.gg/api/products/<span class="url-paramater">:ID</span></code>
+<code>GET https://selly.gg/api/v2/products/<span class="url-paramater">:ID</span></code>
 
 ### URL Parameters
 

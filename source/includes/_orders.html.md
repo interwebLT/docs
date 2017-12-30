@@ -121,7 +121,7 @@ Selly::Orders.list
 ```
 
 ```shell
-curl "https://selly.gg/api/orders"
+curl "https://selly.gg/api/v2/orders"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -184,7 +184,7 @@ This endpoint retrieves all orders.
 
 ### HTTP Request
 
-`GET https://selly.gg/api/orders`
+`GET https://selly.gg/api/v2/orders`
 
 ### Query Parameters
 
@@ -199,7 +199,7 @@ Selly::Orders.get('fd87d909-fbfc-466c-964a-5478d5bc066a')
 ```
 
 ```shell
-curl "https://selly.gg/api/orders/fd87d909-fbfc-466c-964a-5478d5bc066a"
+curl "https://selly.gg/api/v2/orders/fd87d909-fbfc-466c-964a-5478d5bc066a"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
@@ -236,7 +236,7 @@ This endpoint retrieves a specific order.
 
 ### HTTP Request
 
-<code>GET https://selly.gg/api/orders/<span class="url-paramater">:ID</span></code>
+<code>GET https://selly.gg/api/v2/orders/<span class="url-paramater">:ID</span></code>
 
 ### URL Parameters
 

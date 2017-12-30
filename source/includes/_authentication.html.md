@@ -3,7 +3,7 @@
 > To authorize, use this code:
 
 ```shell
-curl "https://selly.gg/api/"
+curl "https://selly.gg/api/v2/"
   -H "Authorization: Basic eW91cmVtYWlsOnRoaXNpc3lvdXJBUElLZXk="
 ```
 
